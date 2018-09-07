@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--配置日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--helperDialect 方言:就表示此插件针对哪个数据库进行优化处理
+            这个方言可以不配置,因为此插件可以依据你的 url 的信息来推断出
+            你用的数据库是哪一个
+            -->
+            <property name="helperDialect" value="mysql"/>
+            <!--支持方法参数-->
+            <property name="supportMethodsArguments" value="true"/>
+
+        </plugin>
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/userdb?serverTimezone=GMT&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapped-config.xml"/>
+    </mappers>
+</configuration>
